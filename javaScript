@@ -1,0 +1,47 @@
+import random
+
+# Papan permainan ular tangga
+board = {
+    3: 22, 5: 8, 11: 26, 20: 29, 17: 4, 19: 7, 27: 1, 21: 9
+}
+
+def roll_dice():
+    # Fungsi untuk melempar dadu
+    return random.randint(1, 6)
+
+def move_player(position, roll):
+    # Fungsi untuk memindahkan pemain
+    position += roll
+    if position in board:
+        print(f"Berpindah dari {position} ke {board[position]}")
+        position = board[position]
+    return position
+
+def main():
+    player1_pos = 0
+    player2_pos = 0
+    turn = 0
+
+    while player1_pos < 30 and player2_pos < 30:
+        if turn % 2 == 0:
+            print("Giliran Pemain 1")
+            roll = roll_dice()
+            print(f"Pemain 1 melempar dadu: {roll}")
+            player1_pos = move_player(player1_pos, roll)
+            print(f"Posisi Pemain 1: {player1_pos}\n")
+        else:
+            print("Giliran Pemain 2")
+            roll = roll_dice()
+            print(f"Pemain 2 melempar dadu: {roll}")
+            player2_pos = move_player(player2_pos, roll)
+            print(f"Posisi Pemain 2: {player2_pos}\n")
+
+        turn += 1
+
+    if player1_pos >= 30:
+        print("Pemain 1 menang!")
+    else:
+        print("Pemain 2 menang!")
+
+if __name__ == "__main__":
+    main()
